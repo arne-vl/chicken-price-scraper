@@ -21,5 +21,5 @@ from chickenPriceAPI.views import ChickenPriceView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("chickenPrice/", ChickenPriceView.as_view()),
+    path("", ChickenPriceView.as_view()),
 ]

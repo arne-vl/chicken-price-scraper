@@ -20,8 +20,8 @@ def get_most_recent_price():
     prices = {
         "week": week,
         "date": date,
-        "deinze": deinze,
-        "abc": abc,
+        "deinze": "€" + deinze[:-2],
+        "abc": "€" + abc[:-2],
     }
 
     return prices
