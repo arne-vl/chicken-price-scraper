@@ -1,0 +1,7 @@
+version: '3'
+services:
+  chicken-price:
+    container_name: chicken-price-api
+    image: chicken-price-api
+    ports:
+      - "8083:8000"
