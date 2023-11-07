@@ -40,6 +40,14 @@ def save_price(prices: dict):
     if PriceQuotation.objects.filter(
         week=prices["week"], date=change_date_format(prices["date"])
     ).exists():
-        pass
+        pc = PriceQuotation.objects.filter(
+            week=prices["week"], date=change_date_format(prices["date"])
+        ).first()
+
+        if pc.deinze != prices["deinze"] or pc.abc != prices["abc"]:
+            pc.deinze = prices["deinze"]
+            pc.abc = prices["abc"]
+            pc.save()
+            
     else:
         PriceQuotation.save(price_quotation)
