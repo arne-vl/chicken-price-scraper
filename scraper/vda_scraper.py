@@ -12,15 +12,14 @@ def scrape_price():
     if response.status_code == 200:
         html = HTMLParser(response.text)
 
-        price_string = html.css("div.Row--withGutter")[1].text()
+        price_row = html.css("div.Row--withGutter")[1]
 
-        while len(price_string) < 30:
-            price_string += "x"
+        contents = price_row.css("p")
 
-        week = price_string[:-28]
-        date = price_string[-28:-18]
-        deinze = price_string[-18:-12]
-        abc = price_string[-12:-6]
+        week = contents[0].text()
+        date = contents[1].text()
+        deinze = contents[2].text()
+        abc = contents[3].text()
 
         prices = {
             "week": week,

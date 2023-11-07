@@ -4,6 +4,15 @@ from scraper.change_date_format import change_date_format
 def get_most_recent_price() -> dict:
     ordered = PriceQuotation.objects.order_by("-date")
     recent = ordered[0]
+
+    if len(ordered) == 1:
+        return {
+            "week": recent.week,
+            "date": recent.date,
+            "deinze": f"€ {recent.deinze}",
+            "abc": f"€ {recent.abc}",
+        }
+
     previous = ordered[1]
     return {
         "week": recent.week,
@@ -13,11 +22,11 @@ def get_most_recent_price() -> dict:
     }
 
 def save_price(prices: dict):
-    if prices["abc"] == "xxxxxx":
+    if prices["abc"] == "":
         previous_quotation = PriceQuotation.objects.order_by("-date")[0]
         prices["abc"] = previous_quotation.abc
     
-    if prices["deinze"] == "xxxxxx":
+    if prices["deinze"] == "":
         previous_quotation = PriceQuotation.objects.order_by("-date")[0]
         prices["deinze"] = previous_quotation.deinze
 
