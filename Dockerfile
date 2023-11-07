@@ -10,8 +10,12 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-RUN python3 manage.py crontab add
+RUN apt-get update && apt-get -y install cron
 
 RUN python3 manage.py migrate
 
-CMD ["sh", "-c", "python3 manage.py runserver 0.0.0.0:8000 && python3 manage.py"]
+RUN python3 manage.py crontab add
+
+RUN service cron start
+
+CMD ["sh", "-c", "python3 manage.py runserver 0.0.0.0:8000"]
