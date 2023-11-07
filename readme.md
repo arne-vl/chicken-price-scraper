@@ -4,5 +4,5 @@ Markets
 * ABC
 
 ## Install
-* `docker build .`
+* `docker build . -t chicken-price-api`
 * `docker compose up -d``
