@@ -1,10 +1,8 @@
 import httpx
 from selectolax.parser import HTMLParser
-from api.functions import save_price
-from datetime import date
+from api.functions import save_chicken_price
 
-
-def scrape_price():
+def scrape_chicken_price():
 
     URL = "https://www.vda-ooigem.be/nl/marktprijzen/braadkippen"
 
@@ -32,4 +30,4 @@ def scrape_price():
         if week > date.today().strftime("%W"):
            return 
 
-        save_price(prices)
+        save_chicken_price(prices)

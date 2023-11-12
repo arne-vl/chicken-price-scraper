@@ -1,7 +1,7 @@
 from price_quotation.models import ChickenPriceQuotation
 from scraper.change_date_format import change_date_format
 
-def get_most_recent_price() -> dict:
+def get_most_recent_chicken_price() -> dict:
     ordered = ChickenPriceQuotation.objects.order_by("-date")
     recent = ordered[0]
 
@@ -21,7 +21,7 @@ def get_most_recent_price() -> dict:
         "abc": f"€ {recent.abc} ({(recent.abc - previous.abc):.2f})",
     }
 
-def save_price(prices: dict):
+def save_chicken_price(prices: dict):
     if prices["abc"] == "":
         previous_quotation = ChickenPriceQuotation.objects.order_by("-date")[0]
         prices["abc"] = previous_quotation.abc
