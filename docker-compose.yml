@@ -1,7 +1,22 @@
 version: '3'
 services:
-  chicken-price:
+  chicken-price-db:
+    container_name: chicken-price-db
+    image: postgres:12.1-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chicken_price_db
+    ports:
+      - "5483:5432"
+    volumes:
+      - .:/db
+  
+  chicken-price-api:
     container_name: chicken-price-api
-    image: chicken-price-api
+    build: .
     ports:
       - "8083:8000"
+    depends_on:
+      - chicken-price-db
+      

@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class PriceQuotation(models.Model):
+class ChickenPriceQuotation(models.Model):
     date = models.DateField()
     week = models.IntegerField()
     deinze = models.FloatField(max_length=10)

@@ -1,6 +1,7 @@
 import httpx
 from selectolax.parser import HTMLParser
 from api.functions import save_price
+from datetime import date
 
 
 def scrape_price():
@@ -27,5 +28,8 @@ def scrape_price():
             "deinze": deinze.replace(",", "."),
             "abc": abc.replace(",", ".")
         }
+
+        if week > date.today().strftime("%W"):
+           return 
 
         save_price(prices)

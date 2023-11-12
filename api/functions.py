@@ -1,8 +1,8 @@
-from price_quotation.models import PriceQuotation
+from price_quotation.models import ChickenPriceQuotation
 from scraper.change_date_format import change_date_format
 
 def get_most_recent_price() -> dict:
-    ordered = PriceQuotation.objects.order_by("-date")
+    ordered = ChickenPriceQuotation.objects.order_by("-date")
     recent = ordered[0]
 
     if len(ordered) == 1:
@@ -23,24 +23,24 @@ def get_most_recent_price() -> dict:
 
 def save_price(prices: dict):
     if prices["abc"] == "":
-        previous_quotation = PriceQuotation.objects.order_by("-date")[0]
+        previous_quotation = ChickenPriceQuotation.objects.order_by("-date")[0]
         prices["abc"] = previous_quotation.abc
     
     if prices["deinze"] == "":
-        previous_quotation = PriceQuotation.objects.order_by("-date")[0]
+        previous_quotation = ChickenPriceQuotation.objects.order_by("-date")[0]
         prices["deinze"] = previous_quotation.deinze
 
-    price_quotation = PriceQuotation(
+    price_quotation = ChickenPriceQuotation(
         week=prices["week"],
         date=change_date_format(prices["date"]),
         deinze=prices["deinze"],
         abc=prices["abc"],
     )
 
-    if PriceQuotation.objects.filter(
+    if ChickenPriceQuotation.objects.filter(
         week=prices["week"], date=change_date_format(prices["date"])
     ).exists():
-        pc = PriceQuotation.objects.filter(
+        pc = ChickenPriceQuotation.objects.filter(
             week=prices["week"], date=change_date_format(prices["date"])
         ).first()
 
@@ -50,4 +50,4 @@ def save_price(prices: dict):
             pc.save()
             
     else:
-        PriceQuotation.save(price_quotation)
+        ChickenPriceQuotation.save(price_quotation)
