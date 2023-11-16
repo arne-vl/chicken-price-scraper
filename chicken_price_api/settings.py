@@ -130,5 +130,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRONJOBS = [
-    ("0 0 * * *", "chicken_price_api.cron.get_prices"),
+    ("0 0 * * *", "chicken_price_api.cron.get_chicken_prices"),
 ]
