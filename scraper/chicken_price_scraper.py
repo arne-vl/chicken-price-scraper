@@ -30,7 +30,7 @@ def scrape_chicken_price():
 
         scraped_date_splitted = scraped_date.split("/")
 
-        if date(scraped_date_splitted[2], scraped_date_splitted[1], scraped_date_splitted[0]) > date.today():
+        if date(int(scraped_date_splitted[2]), int(scraped_date_splitted[1]), int(scraped_date_splitted[0])) > date.today():
            return 
         else:
             save_chicken_price(prices)
