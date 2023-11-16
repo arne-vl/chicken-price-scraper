@@ -1,6 +1,7 @@
 import httpx
 from selectolax.parser import HTMLParser
 from api.functions import save_chicken_price
+from datetime import date
 
 def scrape_chicken_price():
 
@@ -16,18 +17,18 @@ def scrape_chicken_price():
         contents = price_row.css("p")
 
         week = contents[0].text()
-        date = contents[1].text()
+        scraped_date = contents[1].text()
         deinze = contents[2].text()
         abc = contents[3].text()
 
         prices = {
             "week": week,
-            "date": date,
+            "date": scraped_date,
             "deinze": deinze.replace(",", "."),
             "abc": abc.replace(",", ".")
         }
 
-        if week > date.today().strftime("%W"):
+        if scraped_date > date.today().strftime("%W"):
            return 
 
         save_chicken_price(prices)
