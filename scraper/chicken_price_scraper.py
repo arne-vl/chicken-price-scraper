@@ -28,7 +28,9 @@ def scrape_chicken_price():
             "abc": abc.replace(",", ".")
         }
 
-        if scraped_date > date.today().strftime("%W"):
-           return 
+        scraped_date_splitted = scraped_date.split("/")
 
-        save_chicken_price(prices)
+        if date(scraped_date_splitted[2], scraped_date_splitted[1], scraped_date_splitted[0]) > date.today():
+           return 
+        else:
+            save_chicken_price(prices)
